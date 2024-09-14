@@ -13,24 +13,25 @@ public class CheckingAccount extends BankAccount{
         if (amount > 0 && amount <= getBalance()){
             // Regular withdrawal if sufficient balance
             super.withdrawal(amount);
-        } else if (amount > getBalance()){
-            // Overdraft case
-            double overdraftfee = 30.0;
-
-            double newBalance = getBalance() - (amount + overdraftfee);
-            setBalance(newBalance);
-            
-            System.out.println("Overdraft! A $30 fee has been charged.");
-            System.out.printf("New balance: $%.2f%n", newBalance);
         } else {
-            System.out.println("Invalid withdrawal amount.");
+            System.out.println("Insufficient funds or invalid amount.");
         }
     }
 
     // Method to indicate fee has been accessed
     public void processWithdrawal(double amount){
         if (amount > getBalance()){
+            // apply overdraft fee & calculate new balance
+            double overdraftFee = 30.0;
+            double newBalance = getBalance() - (amount + overdraftFee);
+            setBalance(newBalance); //update actual balance
+
+            // display new negative balance and denote that a few has been applied
+            System.out.printf("Overdraft! A $30 fee has been charged. New balance: $%.2f%n", newBalance); 
             System.out.println("Overdraft fee applied.");
+        } else {
+            // if no overdraft, just perform normal withdrawal
+            withdrawal(amount);
         }
     }
 
