@@ -14,7 +14,7 @@
     - Setters and getters
     - getBalance() getter to return balance
     - accountSummary() - prints all account info
- - Part II:
+- Part II:
     - has interest rate attribute
     - allows overdraft withdrawals and charges #30 fee
   - Methods:
